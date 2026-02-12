@@ -8,7 +8,7 @@ function App() {
   const [notes, setNotes] = useState([{}])
 
 function fetchNotes() {
-  axios.get('http://localhost:3000/api/notes').then(response => {
+  axios.get('https://fullstack-notes-imyu.onrender.com/api/notes').then(response => {
     setNotes(response.data.notes);
   }).catch(error => {
     console.error("Error fetching notes:", error);
@@ -29,21 +29,21 @@ function handleSubmit(event) {
     return;
   }
 
-  axios.post('http://localhost:3000/api/notes', { title, description }).then(response => {
+  axios.post('https://fullstack-notes-imyu.onrender.com/api/notes', { title, description }).then(response => {
     fetchNotes(); // Refresh the notes list after adding a new note
     event.target[0].value = '';
     event.target[1].value = '';
   })}
 
   function handleDelete(id) {
-    axios.delete(`http://localhost:3000/api/notes/${id}`).then(response => {
+    axios.delete(`https://fullstack-notes-imyu.onrender.com/api/notes/${id}`).then(response => {
       fetchNotes(); // Refresh the notes list after deleting a note
     }) }
 
     function handleEdit(id) {
       const newDescription = prompt("Enter new description:");
       if (newDescription) {
-        axios.patch(`http://localhost:3000/api/notes/${id}`, { description: newDescription }).then(response => {
+        axios.patch(`https://fullstack-notes-imyu.onrender.com/api/notes/${id}`, { description: newDescription }).then(response => {
           fetchNotes(); // Refresh the notes list after editing a note
         }) 
       }

@@ -5,7 +5,10 @@ const path = require('path');
 const noteModel = require('../models/notes.model');  
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://fullstack-notes-imyu.onrender.com', // Your frontend URL
+    credentials: true
+}));
 app.use(express.static(path.join(__dirname, '..', '/public')));
 
 /*POST API to create a new note*/
@@ -36,9 +39,9 @@ app.patch('/api/notes/:id', async (req, res) => {
     res.status(200).json({message: "Note updated successfully", note });
 });
 
-app.use('*name', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '/public/index.html'));
-})
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'));
+});
 
 
 
