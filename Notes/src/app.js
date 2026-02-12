@@ -39,7 +39,7 @@ app.patch('/api/notes/:id', async (req, res) => {
     res.status(200).json({message: "Note updated successfully", note });
 });
 
-app.get('*', (req, res) => {
+app.get(/^(?!\/api).+/, (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'));
 });
 
